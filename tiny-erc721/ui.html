@@ -29,7 +29,7 @@
 <div id="main_app" style="display: none;">
 	<fieldset id="deployed_contracts_container" style="display: none;">
 		<legend>Deployed ERC721 Contracts</legend>
-		<table  id="deployed_contracts"><tr><td>Loading...</td></tr></table>
+		<table id="deployed_contracts"><tr><td>Loading...</td></tr></table>
 	</fieldset>
 	<fieldset><legend>Deploy New ERC721 Contract (Collection)</legend>
 		<form onsubmit="deploy_contract(event)">
@@ -130,6 +130,7 @@
 <div style="position: fixed; right: 0; bottom: 0; margin: 0.1em 0.2em; font-family: monospace;">
 	[<a href="https://lazy-sol.github.io/advanced-erc20/ui.html">Advanced ERC20</a>]
 	[Tiny ERC721]
+	[<a href="https://lazy-sol.github.io/access-control/ui.html">RBAC Inspector</a>]
 </div>
 </body>
 <script type="text/javascript">
@@ -467,8 +468,8 @@ function deployed_contracts_list_add(contract) {
 }
 
 // renders an HTML of the ERC721 list table row
-function render_contract_row(token) {
-	return `<tr><td>${token.name}</td><td>${token.symbol}</td><td onclick="select_token('${token.address}');">${token.address}</td></tr>`;
+function render_contract_row({name, symbol, address}) {
+	return `<tr><td>${name}</td><td>${symbol}</td><td onclick="select_token('${address}');">${address}</td></tr>`;
 }
 
 // populates mint, burn, etc. inputs in the UI
@@ -591,7 +592,7 @@ function deploy_contract(e) {
 	}
 
 	if(!CONF.deployments_loaded()) {
-		non_fatal_error("Application is still loading. Please wait.");
+		alert("Application is still loading. Please wait.");
 		return false;
 	}
 
@@ -672,7 +673,7 @@ function mint_nft(e) {
 	}
 
 	if(!CONF.deployments_loaded()) {
-		non_fatal_error("Application is still loading. Please wait.");
+		alert("Application is still loading. Please wait.");
 		return false;
 	}
 
@@ -742,7 +743,7 @@ function update_uri(e) {
 	}
 
 	if(!CONF.deployments_loaded()) {
-		non_fatal_error("Application is still loading. Please wait.");
+		alert("Application is still loading. Please wait.");
 		return false;
 	}
 
@@ -896,7 +897,7 @@ function update_features(e) {
 	}
 
 	if(!CONF.deployments_loaded()) {
-		non_fatal_error("Application is still loading. Please wait.");
+		alert("Application is still loading. Please wait.");
 		return false;
 	}
 
